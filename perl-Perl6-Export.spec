@@ -4,13 +4,15 @@
 #
 Name     : perl-Perl6-Export
 Version  : 0.009
-Release  : 10
+Release  : 11
 URL      : https://cpan.metacpan.org/authors/id/D/DC/DCONWAY/Perl6-Export-0.009.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/D/DC/DCONWAY/Perl6-Export-0.009.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libp/libperl6-export-perl/libperl6-export-perl_0.009-1.debian.tar.xz
 Summary  : "Implements the Perl 6 'is export(...)' trait"
 Group    : Development/Tools
-License  : Artistic-1.0-Perl
+License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0
+Requires: perl-Perl6-Export-license = %{version}-%{release}
+Requires: perl-Perl6-Export-perl = %{version}-%{release}
 BuildRequires : buildreq-cpan
 
 %description
@@ -23,23 +25,42 @@ in Perl 5.
 Summary: dev components for the perl-Perl6-Export package.
 Group: Development
 Provides: perl-Perl6-Export-devel = %{version}-%{release}
+Requires: perl-Perl6-Export = %{version}-%{release}
 
 %description dev
 dev components for the perl-Perl6-Export package.
 
 
+%package license
+Summary: license components for the perl-Perl6-Export package.
+Group: Default
+
+%description license
+license components for the perl-Perl6-Export package.
+
+
+%package perl
+Summary: perl components for the perl-Perl6-Export package.
+Group: Default
+Requires: perl-Perl6-Export = %{version}-%{release}
+
+%description perl
+perl components for the perl-Perl6-Export package.
+
+
 %prep
 %setup -q -n Perl6-Export-0.009
-cd ..
-%setup -q -T -D -n Perl6-Export-0.009 -b 1
+cd %{_builddir}
+tar xf %{_sourcedir}/libperl6-export-perl_0.009-1.debian.tar.xz
+cd %{_builddir}/Perl6-Export-0.009
 mkdir -p deblicense/
-mv %{_topdir}/BUILD/debian/* %{_topdir}/BUILD/Perl6-Export-0.009/deblicense/
+cp -r %{_builddir}/debian/* %{_builddir}/Perl6-Export-0.009/deblicense/
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
+export LANG=C.UTF-8
 if test -f Makefile.PL; then
 %{__perl} Makefile.PL
 make  %{?_smp_mflags}
@@ -49,7 +70,7 @@ else
 fi
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
@@ -57,6 +78,8 @@ make TEST_VERBOSE=1 test
 
 %install
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/package-licenses/perl-Perl6-Export
+cp %{_builddir}/Perl6-Export-0.009/deblicense/copyright %{buildroot}/usr/share/package-licenses/perl-Perl6-Export/c5ba815629c7483b6ac2b6c2fa255e33c4ff453e
 if test -f Makefile.PL; then
 make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
@@ -69,8 +92,15 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.28.2/Perl6/Export.pm
 
 %files dev
 %defattr(-,root,root,-)
 /usr/share/man/man3/Perl6::Export.3
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/perl-Perl6-Export/c5ba815629c7483b6ac2b6c2fa255e33c4ff453e
+
+%files perl
+%defattr(-,root,root,-)
+/usr/lib/perl5/vendor_perl/5.30.1/Perl6/Export.pm
