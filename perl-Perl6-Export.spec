@@ -4,7 +4,7 @@
 #
 Name     : perl-Perl6-Export
 Version  : 0.009
-Release  : 11
+Release  : 12
 URL      : https://cpan.metacpan.org/authors/id/D/DC/DCONWAY/Perl6-Export-0.009.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/D/DC/DCONWAY/Perl6-Export-0.009.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libp/libperl6-export-perl/libperl6-export-perl_0.009-1.debian.tar.xz
@@ -79,7 +79,7 @@ make TEST_VERBOSE=1 test
 %install
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/perl-Perl6-Export
-cp %{_builddir}/Perl6-Export-0.009/deblicense/copyright %{buildroot}/usr/share/package-licenses/perl-Perl6-Export/c5ba815629c7483b6ac2b6c2fa255e33c4ff453e
+cp %{_builddir}/debian/copyright %{buildroot}/usr/share/package-licenses/perl-Perl6-Export/c5ba815629c7483b6ac2b6c2fa255e33c4ff453e
 if test -f Makefile.PL; then
 make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
@@ -103,4 +103,4 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files perl
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.30.1/Perl6/Export.pm
+/usr/lib/perl5/vendor_perl/5.30.2/Perl6/Export.pm
