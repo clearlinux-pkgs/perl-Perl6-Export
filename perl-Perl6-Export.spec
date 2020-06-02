@@ -4,7 +4,7 @@
 #
 Name     : perl-Perl6-Export
 Version  : 0.009
-Release  : 12
+Release  : 13
 URL      : https://cpan.metacpan.org/authors/id/D/DC/DCONWAY/Perl6-Export-0.009.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/D/DC/DCONWAY/Perl6-Export-0.009.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libp/libperl6-export-perl/libperl6-export-perl_0.009-1.debian.tar.xz
@@ -103,4 +103,4 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files perl
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.30.2/Perl6/Export.pm
+/usr/lib/perl5/vendor_perl/5.30.3/Perl6/Export.pm
