@@ -4,7 +4,7 @@
 #
 Name     : perl-Perl6-Export
 Version  : 0.009
-Release  : 18
+Release  : 19
 URL      : https://cpan.metacpan.org/authors/id/D/DC/DCONWAY/Perl6-Export-0.009.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/D/DC/DCONWAY/Perl6-Export-0.009.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libp/libperl6-export-perl/libperl6-export-perl_0.009-1.debian.tar.xz
